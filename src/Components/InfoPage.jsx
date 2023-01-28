@@ -6,8 +6,7 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from '../Context/useContext';
 
 const InfoPage = () => {
-    const { pathname } = useLocation()
-    const splited = pathname.split(':').at(-1)
+    let splited = useLocation().state
     const { arr } = useContext(AuthContext);
     const { register, handleSubmit, } = useForm();
   const submit = data => console.log(data);
