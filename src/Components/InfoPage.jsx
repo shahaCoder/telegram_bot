@@ -1,36 +1,34 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import { GiSmokeBomb } from 'react-icons/gi'
 import { FcMoneyTransfer } from 'react-icons/fc'
 import { useForm } from "react-hook-form";
+import { AuthContext } from '../Context/useContext';
 
 const InfoPage = () => {
-    const [data, setData] = useState()
     const { pathname } = useLocation()
     const splited = pathname.split(':').at(-1)
-    useEffect(() => {
-        fetch('http://localhost:3001/Products/' + splited)
-          .then(res => res.json())
-          .then(res => setData(res))
-    }, [splited]);
+    const { arr } = useContext(AuthContext);
     const { register, handleSubmit, } = useForm();
   const submit = data => console.log(data);
+  const info = arr?.filter(i => i.id === +splited)[0]
+  console.log(arr);
     return (
         <form onSubmit={handleSubmit(submit)}>
             <div className='flex justify-center'>
             <div className="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
     <h5 className="mb-4 text-xl font-medium text-gray-500 dark:text-gray-400">Оформление заказа</h5>
     <div className="flex items-baseline text-gray-900 dark:text-white">
-        <span className="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400">{data?.name}</span>
+        <span className="ml-1 text-xl font-normal text-gray-500 dark:text-gray-400"></span>
     </div>
     <ul  className="space-y-5 my-7">
         <li className="flex space-x-3 items-center">
             <GiSmokeBomb color='white' />
-            <span className="text-base font-normal leading-tight text-gray-500 dark:text-gray-400">{data?.desc}</span>
+            <span className="text-base font-normal leading-tight text-gray-500 dark:text-gray-400">{info?.name}</span>
         </li>
         <li className="flex space-x-3 items-center">
             <FcMoneyTransfer />
-            <span className="text-base font-normal leading-tight text-gray-500 dark:text-gray-400">{data?.price}</span>
+            <span className="text-base font-normal leading-tight text-gray-500 dark:text-gray-400">{info?.desc}</span>
         </li>
         <li className='text-base font-normal leading-tight text-gray-500 dark:text-gray-400'>Типы доставки:</li>
         <div className='flex items-center gap-2'>

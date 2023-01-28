@@ -1,17 +1,14 @@
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
+import { useContext } from 'react';
 import './App.css';
 import Products from './Components/Products';
+import { AuthContext } from './Context/useContext';
 
 function App() {
-  const [data, setData] = useState()
-  useEffect(() => {
-    fetch('http://localhost:3001/Products/')
-      .then(res => res.json())
-      .then(res => setData(res))
-  }, []);
+  const { arr } = useContext(AuthContext);
   return (
     <div>
-            <Products data={data} />
+            <Products data={arr} />
     </div>
   );
 }
