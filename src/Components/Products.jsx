@@ -6,9 +6,6 @@ const Products = ({data}) => {
     useEffect(() => {
         tg.ready()
     }, []);
-    const handleClose = () => {
-      tg.close()
-    }
     return (
         <div className='w-[90%] m-auto'>
         <h1 className='mb-6 mt-2'>Привет, <span>
