@@ -13,7 +13,7 @@ const Products = ({data}) => {
          </span></h1>
         <div className='w-full  flex flex-wrap gap-2'>
             {
-                data.map(i => <Item key={i.id} item={i} />)
+                data?.map(i => <Item key={i.id} item={i} />)
             }
         </div>
         </div>
