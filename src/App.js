@@ -13,6 +13,9 @@ function App() {
     <div>
          work
          <button onClick={handleClose}>Close</button>
+         <span>
+             {tg.initDataUnsafe?.user?.username}
+         </span>
     </div>
   );
 }
