@@ -25,7 +25,7 @@ const InfoPage = () => {
 		data[key] = value
 	})
 	console.log(data);
-	if(delivery === false || mySelf === false){
+	if(delivery === true || mySelf === true){
 		tg.MainButton.text = 'Купить'
 		tg.MainButton.show()
 	} else {
