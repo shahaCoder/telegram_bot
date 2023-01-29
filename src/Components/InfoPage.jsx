@@ -11,6 +11,7 @@ const InfoPage = () => {
   const { arr } = useContext(AuthContext);
   const [delivery, setDelivery] = useState(false)
   const [mySelf, setMySelf] = useState(false)
+  const [name, setName] = useState('')
 //   const [dataArr, setDataArr] = useState()
 //   const [adress, setAdress] = useState()
   const [cash, setCash] = useState(false)
@@ -46,12 +47,14 @@ const InfoPage = () => {
 	setDelivery(!delivery)
 }
   const info = arr?.filter((i) => i.id === +splited)[0];
+  setName(info?.name)
   const onSendData = useCallback(() => {
        const data = {
-          delivery
+          delivery,
+		  name
 	   }
 	   tg.sendData(JSON.stringify(data))
-  }, [delivery])
+  }, [delivery,name])
   useEffect(() => {
 	tg.onEvent('mainButtonClicked', onSendData)
 	return () => {
