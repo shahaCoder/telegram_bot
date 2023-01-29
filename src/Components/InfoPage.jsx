@@ -18,7 +18,10 @@ const InfoPage = () => {
   const [card, setCard] = useState(false)
   const [isDisabled, setIsDisabled] = useState(false)
   const [isDisabled2, setIsDisabled2] = useState(false)
+  const [isDisabled3, setIsDisabled3] = useState(false)
+  const [isDisabled4, setIsDisabled4] = useState(false)
   const [orderType, setOrderType] = useState('')
+  const [orderType2, setOrderType2] = useState('')
   const [error, setError] = useState('')
   const [error2, setError2] = useState('')
   const submit = (e) => {
@@ -56,10 +59,11 @@ const InfoPage = () => {
        const data = {
           delivery,
           name,
-          orderType
+          orderType,
+          orderType2
 	   }
 	   tg.sendData(JSON.stringify(data))
-  }, [delivery,name,orderType])
+  }, [delivery,name,orderType, orderType2])
   useEffect(() => {
 	tg.onEvent('mainButtonClicked', onSendData)
 	return () => {
@@ -80,6 +84,20 @@ const InfoPage = () => {
       setIsDisabled2(false)
     }
   }, [delivery, mySelf]);
+  useEffect(() => {
+    if(cash === true){
+      setOrderType2('Наличными')
+      setIsDisabled4(true)
+    } else {
+      setOrderType2('Картой')
+      setIsDisabled4(false)
+    }
+    if(card === true){
+      setIsDisabled3(true)
+    } else {
+      setIsDisabled3(false)
+    }
+  }, [cash, card]);
   return (
     <form onSubmit={e => submit(e)}>
       <div className="flex justify-center pt-6">
@@ -146,6 +164,7 @@ const InfoPage = () => {
 				 type="checkbox"
 				 value={cash} 
 				 onChange={() => setCash(!cash)}
+         disabled={isDisabled3}
 				name="cash" />
                 <p className="text-base font-normal leading-tight text-gray-500 dark:text-gray-400">
                   Наличкой
@@ -157,6 +176,7 @@ const InfoPage = () => {
 				name="card" 
 				value={card}
 				onChange={() => setCard(!card)}
+        disabled={isDisabled4}
 				/>
                 <p className="text-base font-normal leading-tight text-gray-500 dark:text-gray-400">
                   Картой(онлайн)
