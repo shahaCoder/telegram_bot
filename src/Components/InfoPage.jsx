@@ -14,6 +14,8 @@ const InfoPage = () => {
 //   const [adress, setAdress] = useState()
   const [cash, setCash] = useState(false)
   const [card, setCard] = useState(false)
+  const [error, setError] = useState('')
+  const [error2, setError2] = useState('')
   const submit = (e) => {
 	e.preventDefault()
 
@@ -26,10 +28,18 @@ const InfoPage = () => {
 	})
 	console.log(data);
 	if(delivery === true || mySelf === true){
-		tg.MainButton.text = 'Купить'
-		tg.MainButton.show()
+		setError('')
+		if(cash === true || card === true){
+			tg.MainButton.text = 'Купить'
+			setError2('')	
+		    tg.MainButton.show()
+		} else {
+			tg.MainButton.hide()
+			setError2('Обязательно выберите тип оплаты!')	
+		}
 	} else {
 		tg.MainButton.hide()
+		setError('Обязательно выберите тип доставки!')
 	}
   };
   const handleChange = () => {
@@ -43,7 +53,7 @@ const InfoPage = () => {
   return (
     <form onSubmit={e => submit(e)}>
       <div className="flex justify-center pt-6">
-        <div className="w-full max-w-sm p-4 h-[500px] bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+        <div className="w-full max-w-sm p-4  bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
           <h5 className="mb-4 text-xl font-medium text-gray-500 dark:text-gray-400">
             Оформление заказа
           </h5>
@@ -80,6 +90,9 @@ const InfoPage = () => {
                 </p>
               </div>
             </div>
+			<p className="text-red-500">
+			{error}
+			</p>
             <div className="mb-6">
               <label
                 htmlFor="large-input"
@@ -120,7 +133,10 @@ const InfoPage = () => {
                 </p>
               </div>
             </div>
-		  <button type="submit">Send</button>
+			<p className="text-red-500">
+			{error2}
+			</p>
+		  <button type="submit" class="text-white bg-blue-600 hover:bg-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex justify-center w-full text-center">Сохранить</button>
           </ul>
         </div>
       </div>
