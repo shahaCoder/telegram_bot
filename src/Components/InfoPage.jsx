@@ -16,6 +16,7 @@ const InfoPage = () => {
 //   const [adress, setAdress] = useState()
   const [cash, setCash] = useState(false)
   const [card, setCard] = useState(false)
+  const [orderType, setOrderType] = useState('')
   const [error, setError] = useState('')
   const [error2, setError2] = useState('')
   const submit = (e) => {
@@ -29,6 +30,7 @@ const InfoPage = () => {
 	fm.forEach((value, key) => {
 		data[key] = value
 	})
+  console.log(orderType);
 	if(delivery === true || mySelf === true){
 		setError('')
 		if(cash === true || card === true){
@@ -51,16 +53,24 @@ const InfoPage = () => {
   const onSendData = useCallback(() => {
        const data = {
           delivery,
-		  name
+          name,
+          orderType
 	   }
 	   tg.sendData(JSON.stringify(data))
-  }, [delivery,name])
+  }, [delivery,name,orderType])
   useEffect(() => {
 	tg.onEvent('mainButtonClicked', onSendData)
 	return () => {
 		tg.offEvent('mainButtonClicked', onSendData)
 	}
   }, [onSendData]);
+  useEffect(() => {
+    if(delivery === true){
+      setOrderType('Доставка')
+    } else {
+      setOrderType('Самовывоз')
+    }
+  }, [delivery]);
   return (
     <form onSubmit={e => submit(e)}>
       <div className="flex justify-center pt-6">
