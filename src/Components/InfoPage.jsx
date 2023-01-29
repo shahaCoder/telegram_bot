@@ -16,6 +16,8 @@ const InfoPage = () => {
 //   const [adress, setAdress] = useState()
   const [cash, setCash] = useState(false)
   const [card, setCard] = useState(false)
+  const [isDisabled, setIsDisabled] = useState(false)
+  const [isDisabled2, setIsDisabled2] = useState(false)
   const [orderType, setOrderType] = useState('')
   const [error, setError] = useState('')
   const [error2, setError2] = useState('')
@@ -67,10 +69,17 @@ const InfoPage = () => {
   useEffect(() => {
     if(delivery === true){
       setOrderType('Доставка')
+      setIsDisabled(true)
     } else {
       setOrderType('Самовывоз')
+      setIsDisabled(false)
     }
-  }, [delivery]);
+    if(mySelf === true){
+      setIsDisabled2(true)
+    } else {
+      setIsDisabled2(false)
+    }
+  }, [delivery, mySelf]);
   return (
     <form onSubmit={e => submit(e)}>
       <div className="flex justify-center pt-6">
@@ -99,13 +108,13 @@ const InfoPage = () => {
             </li>
             <div className="w-full flex gap-5">
               <div className="flex items-center gap-2">
-                <input type="checkbox" name="delivery" value={delivery} onChange={handleChange} />
+                <input type="checkbox" name="delivery" disabled={isDisabled2} value={delivery} onChange={handleChange} />
                 <p className="text-base font-normal leading-tight text-gray-500 dark:text-gray-400">
                   Доставка
                 </p>
               </div>
               <div className="flex items-center gap-2">
-                <input type="checkbox" name="mySelf" value={mySelf} onChange={() => setMySelf(!mySelf)} />
+                <input type="checkbox" name="mySelf" disabled={isDisabled} value={mySelf} onChange={() => setMySelf(!mySelf)} />
                 <p className="text-base font-normal leading-tight text-gray-500 dark:text-gray-400">
                   Самовывоз
                 </p>
