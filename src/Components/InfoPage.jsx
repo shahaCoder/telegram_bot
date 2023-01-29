@@ -11,7 +11,7 @@ const InfoPage = () => {
   const { arr } = useContext(AuthContext);
   const [delivery, setDelivery] = useState(false)
   const [mySelf, setMySelf] = useState(false)
-  const [dataArr, setDataArr] = useState()
+//   const [dataArr, setDataArr] = useState()
 //   const [adress, setAdress] = useState()
   const [cash, setCash] = useState(false)
   const [card, setCard] = useState(false)
@@ -27,7 +27,6 @@ const InfoPage = () => {
 	fm.forEach((value, key) => {
 		data[key] = value
 	})
-	setDataArr(data);
 	if(delivery === true || mySelf === true){
 		setError('')
 		if(cash === true || card === true){
@@ -49,10 +48,10 @@ const InfoPage = () => {
   const info = arr?.filter((i) => i.id === +splited)[0];
   const onSendData = useCallback(() => {
        const data = {
-          ...dataArr
+          delivery
 	   }
 	   tg.sendData(JSON.stringify(data))
-  }, [dataArr])
+  }, [delivery])
   useEffect(() => {
 	tg.onEvent('mainButtonClicked', onSendData)
 	return () => {
