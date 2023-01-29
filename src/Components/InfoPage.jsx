@@ -24,6 +24,7 @@ const InfoPage = () => {
 	let data = {
 		id: uuidv4()
 	}
+	setName(info?.name)
 	let fm = new FormData(e.target)
 	fm.forEach((value, key) => {
 		data[key] = value
@@ -47,7 +48,6 @@ const InfoPage = () => {
 	setDelivery(!delivery)
 }
   const info = arr?.filter((i) => i.id === +splited)[0];
-  setName(info?.name)
   const onSendData = useCallback(() => {
        const data = {
           delivery,
