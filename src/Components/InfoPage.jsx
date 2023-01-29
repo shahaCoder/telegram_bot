@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { GiSmokeBomb } from "react-icons/gi";
 import { FcMoneyTransfer } from "react-icons/fc";
@@ -11,6 +11,7 @@ const InfoPage = () => {
   const { arr } = useContext(AuthContext);
   const [delivery, setDelivery] = useState(false)
   const [mySelf, setMySelf] = useState(false)
+  const [dataArr, setDataArr] = useState()
 //   const [adress, setAdress] = useState()
   const [cash, setCash] = useState(false)
   const [card, setCard] = useState(false)
@@ -26,7 +27,7 @@ const InfoPage = () => {
 	fm.forEach((value, key) => {
 		data[key] = value
 	})
-	console.log(data);
+	setDataArr(data);
 	if(delivery === true || mySelf === true){
 		setError('')
 		if(cash === true || card === true){
@@ -46,10 +47,18 @@ const InfoPage = () => {
 	setDelivery(!delivery)
 }
   const info = arr?.filter((i) => i.id === +splited)[0];
-//   useEffect(() => {
-// 	tg.MainButton.text = 'Купить'
-// 	tg.MainButton.show()
-//   }, []);
+  const onSendData = useCallback(() => {
+       const data = {
+          ...dataArr
+	   }
+	   tg.sendData(JSON.stringify(data))
+  }, [dataArr])
+  useEffect(() => {
+	tg.onEvent('mainButtonClicked', onSendData)
+	return () => {
+		tg.offEvent('mainButtonClicked', onSendData)
+	}
+  }, [onSendData]);
   return (
     <form onSubmit={e => submit(e)}>
       <div className="flex justify-center pt-6">
