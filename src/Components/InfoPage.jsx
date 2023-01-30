@@ -72,10 +72,11 @@ const InfoPage = () => {
           delivery,
           name,
           orderType,
-          orderType2
+          orderType2,
+          adressValue
 	   }
 	   tg.sendData(JSON.stringify(data))
-  }, [delivery,name,orderType, orderType2])
+  }, [delivery,name,orderType, orderType2,adressValue])
   useEffect(() => {
 	tg.onEvent('mainButtonClicked', onSendData)
 	return () => {
