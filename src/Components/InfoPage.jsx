@@ -13,7 +13,8 @@ const InfoPage = () => {
   const [mySelf, setMySelf] = useState(false)
   const [name, setName] = useState('')
 //   const [dataArr, setDataArr] = useState()
-//   const [adress, setAdress] = useState()
+  const [adress, setAdress] = useState('')
+  const [adressValue, setAdressValue] = useState('')
   const [cash, setCash] = useState(false)
   const [card, setCard] = useState(false)
   const [isDisabled, setIsDisabled] = useState(false)
@@ -50,10 +51,21 @@ const InfoPage = () => {
 		tg.MainButton.hide()
 		setError('Обязательно выберите тип доставки!')
 	}
+  if(delivery === true){
+    if(adressValue.length <= 0){
+      setAdress('Введите адресс,чтобы продолжить!')
+      tg.MainButton.hide()
+    } else {
+      setAdress('')
+    }
+  }
   };
   const handleChange = () => {
 	setDelivery(!delivery)
 }
+  const adressHandler = (e) => {
+    setAdressValue(e.target.value)
+  }
   const info = arr?.filter((i) => i.id === +splited)[0];
   const onSendData = useCallback(() => {
        const data = {
@@ -152,8 +164,13 @@ const InfoPage = () => {
                 name="adress"
                 type="text"
                 id="large-input"
+                value={adressValue}
+                onChange={(e) => adressHandler(e)}
                 className="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 outline-none"
               />
+              <p className="text-red-500">
+              {adress}
+              </p>
             </div>
             <li className="text-base font-normal leading-tight text-gray-500 dark:text-gray-400">
               Типы оплаты:
@@ -186,7 +203,7 @@ const InfoPage = () => {
 			<p className="text-red-500">
 			{error2}
 			</p>
-		  <button type="submit" class="text-white bg-blue-600 hover:bg-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex justify-center w-full text-center">Сохранить</button>
+		  <button type="submit" className="text-white bg-blue-600 hover:bg-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex justify-center w-full text-center">Сохранить</button>
           </ul>
         </div>
       </div>
