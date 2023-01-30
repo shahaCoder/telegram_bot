@@ -12,7 +12,7 @@ const InfoPage = () => {
   const [delivery, setDelivery] = useState(false)
   const [mySelf, setMySelf] = useState(false)
   const [name, setName] = useState('')
-//   const [dataArr, setDataArr] = useState()
+  const [price, setPrice] = useState(Number)
   const [adress, setAdress] = useState('')
   const [adressValue, setAdressValue] = useState('')
   const [cash, setCash] = useState(false)
@@ -61,6 +61,7 @@ const InfoPage = () => {
   } else {
     setAdress('Не указано(самовывоз)')
   }
+  setPrice(info?.price)
   };
   const handleChange = () => {
 	setDelivery(!delivery)
@@ -75,10 +76,11 @@ const InfoPage = () => {
           name,
           orderType,
           orderType2,
-          adressValue
+          adressValue,
+          price
 	   }
 	   tg.sendData(JSON.stringify(data))
-  }, [delivery,name,orderType, orderType2,adressValue])
+  }, [delivery,name,orderType, orderType2,adressValue, price])
   useEffect(() => {
 	tg.onEvent('mainButtonClicked', onSendData)
 	return () => {
