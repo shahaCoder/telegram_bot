@@ -58,6 +58,8 @@ const InfoPage = () => {
     } else {
       setAdress('')
     }
+  } else {
+    setAdress('Не указано(самовывоз)')
   }
   };
   const handleChange = () => {
