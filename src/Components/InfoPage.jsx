@@ -121,7 +121,7 @@ const InfoPage = () => {
       tasteValue
     };
     tg.sendData(JSON.stringify(data));
-  }, [delivery, name, orderType, orderType2, adressValue, price,tasteValue,adress2]);
+  }, [delivery, name, orderType, orderType2, price,tasteValue,adress2]);
   useEffect(() => {
     tg.onEvent("mainButtonClicked", onSendData);
     return () => {
