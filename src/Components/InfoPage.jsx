@@ -25,13 +25,14 @@ const InfoPage = () => {
   const [isDisabled4, setIsDisabled4] = useState(false);
   const [name, setName] = useState("");
   const [adress, setAdress] = useState("");
-  const [adress2, setAdress2] = useState("");
+  // const [adress2, setAdress2] = useState("");
   const [adressValue, setAdressValue] = useState("");
   const [orderType, setOrderType] = useState("");
   const [orderType2, setOrderType2] = useState("");
   const [error, setError] = useState("");
   const [error2, setError2] = useState("");
   const [tasteError, setTasteError] = useState("");
+  const [tasteValue, setTasteValue] = useState("");
   const submit = (e) => {
     e.preventDefault();
 
@@ -43,7 +44,21 @@ const InfoPage = () => {
     fm.forEach((value, key) => {
       data[key] = value;
     });
-    console.log(orderType);
+    if(taste === true){
+      setTasteValue(info?.desc)
+    }
+    if(taste2 === true){
+      setTasteValue(info?.desc2)
+    }
+    if(taste3 === true){
+      setTasteValue(info?.type)
+    }
+    if(taste4 === true){
+      setTasteValue(info?.type3)
+    }
+    if(taste5 === true){
+      setTasteValue(info?.type4)
+    }
     
     if (delivery === true) {
       if (adressValue.length <= 0) {
@@ -51,11 +66,6 @@ const InfoPage = () => {
         tg.MainButton.hide();
       } else {
         setAdress("");
-      }
-    }
-    if(mySelf === true){
-      if(adressValue.length <= 0){
-        setAdress2("Не указано(самовывоз)");
       }
     }
     if (
@@ -100,11 +110,10 @@ const InfoPage = () => {
       orderType2,
       adressValue,
       price,
-      adress2,
-      taste,taste2,taste3,taste4,taste5
+      tasteValue
     };
     tg.sendData(JSON.stringify(data));
-  }, [delivery, name, orderType, orderType2, adressValue, price,adress2,taste,taste2,taste3,taste4,taste5]);
+  }, [delivery, name, orderType, orderType2, adressValue, price,tasteValue]);
   useEffect(() => {
     tg.onEvent("mainButtonClicked", onSendData);
     return () => {
