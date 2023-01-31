@@ -8,9 +8,7 @@ const Products = ({data}) => {
     }, []);
     return (
         <div className='w-[90%] m-auto'>
-        <h1 className='mb-6 mt-2'>Привет, <span>
-             {tg.initDataUnsafe?.user?.username}
-         </span></h1>
+        <h1 className='mb-6 mt-2'>Привет дружище</h1>
         <div className='w-full  flex flex-wrap gap-2'>
             {
                 data?.map(i => <Item key={i.id} item={i} />)
