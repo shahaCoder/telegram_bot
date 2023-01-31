@@ -38,6 +38,9 @@ const InfoPage = () => {
     const n = tg.initDataUnsafe?.name?.username
     setNameUser(n)
   }, []);
+  useEffect(() => {
+    tg.ready()
+}, []);
   const submit = (e) => {
     e.preventDefault();
 
