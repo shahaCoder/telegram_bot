@@ -33,11 +33,6 @@ const InfoPage = () => {
   const [error2, setError2] = useState("");
   const [tasteError, setTasteError] = useState("");
   const [tasteValue, setTasteValue] = useState("");
-  const [nameUser, setNameUser] = useState("");
-  useEffect(() => {
-    const n = tg.initDataUnsafe?.name?.username
-    setNameUser(n)
-  }, []);
   useEffect(() => {
     tg.ready()
 }, []);
@@ -62,10 +57,10 @@ const InfoPage = () => {
       setTasteValue(info?.type)
     }
     if(taste4 === true){
-      setTasteValue(info?.type3)
+      setTasteValue(info?.type2)
     }
     if(taste5 === true){
-      setTasteValue(info?.type4)
+      setTasteValue(info?.type3)
     }
     
     if (delivery === true) {
@@ -119,11 +114,10 @@ const InfoPage = () => {
       orderType2,
       adressValue,
       price,
-      tasteValue,
-      nameUser
+      tasteValue
     };
     tg.sendData(JSON.stringify(data));
-  }, [delivery, name, orderType, orderType2, adressValue, price,tasteValue,nameUser]);
+  }, [delivery, name, orderType, orderType2, adressValue, price,tasteValue]);
   useEffect(() => {
     tg.onEvent("mainButtonClicked", onSendData);
     return () => {
