@@ -66,8 +66,6 @@ const InfoPage = () => {
       taste5 === true
     ) {
       setTasteError("");
-    } else {
-      setTasteError("Выберите желаемый вкус!");
       if (delivery === true || mySelf === true) {
         setError("");
         if (cash === true || card === true) {
@@ -82,6 +80,8 @@ const InfoPage = () => {
         tg.MainButton.hide();
         setError("Обязательно выберите тип доставки!");
       }
+    } else {
+      setTasteError("Выберите желаемый вкус!");
     }
     setPrice(info?.price);
   };
