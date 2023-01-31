@@ -25,7 +25,7 @@ const InfoPage = () => {
   const [isDisabled4, setIsDisabled4] = useState(false);
   const [name, setName] = useState("");
   const [adress, setAdress] = useState("");
-  // const [adress2, setAdress2] = useState("");
+  const [adress2, setAdress2] = useState(String);
   const [adressValue, setAdressValue] = useState("");
   const [orderType, setOrderType] = useState("");
   const [orderType2, setOrderType2] = useState("");
@@ -64,6 +64,7 @@ const InfoPage = () => {
     }
     
     if (delivery === true) {
+      setAdress2(adressValue)
       if (adressValue.length <= 0) {
         setAdress("Введите адресс,чтобы продолжить!");
         tg.MainButton.hide();
@@ -96,6 +97,9 @@ const InfoPage = () => {
     } else {
       setTasteError("Выберите желаемый вкус!");
     }
+    if(mySelf === true){
+      setAdress2('Самовывоз')
+    }
     setPrice(info?.price);
   };
   const handleChange = () => {
@@ -112,7 +116,7 @@ const InfoPage = () => {
       name,
       orderType,
       orderType2,
-      adressValue,
+      adress2,
       price,
       tasteValue
     };
