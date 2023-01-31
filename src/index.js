@@ -62,7 +62,6 @@ root.render(
       <Routes>
           <Route path='/' element={<App />} />
           <Route path='/info/:id' element={<InfoPage />} />
-          <Route path='/contacts' element={<Contacts />} />
        </Routes>
     </AuthContext.Provider>
     </BrowserRouter>
