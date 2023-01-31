@@ -5,7 +5,6 @@ import { BrowserRouter } from 'react-router-dom';
 import { Route, Routes} from 'react-router-dom';
 import InfoPage from './Components/InfoPage';
 import { AuthContext } from './Context/useContext';
-import Contacts from './Components/Contacts';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const arr = [
   {
