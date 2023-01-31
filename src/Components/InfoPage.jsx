@@ -33,6 +33,11 @@ const InfoPage = () => {
   const [error2, setError2] = useState("");
   const [tasteError, setTasteError] = useState("");
   const [tasteValue, setTasteValue] = useState("");
+  const [nameUser, setNameUser] = useState("");
+  useEffect(() => {
+    const n = tg.initDataUnsafe?.name?.username
+    setNameUser(n)
+  }, []);
   const submit = (e) => {
     e.preventDefault();
 
@@ -102,6 +107,7 @@ const InfoPage = () => {
     setAdressValue(e.target.value);
   };
   const info = arr?.filter((i) => i.id === +splited)[0];
+  // setNameUser()
   const onSendData = useCallback(() => {
     const data = {
       delivery,
@@ -110,10 +116,11 @@ const InfoPage = () => {
       orderType2,
       adressValue,
       price,
-      tasteValue
+      tasteValue,
+      nameUser
     };
     tg.sendData(JSON.stringify(data));
-  }, [delivery, name, orderType, orderType2, adressValue, price,tasteValue]);
+  }, [delivery, name, orderType, orderType2, adressValue, price,tasteValue,nameUser]);
   useEffect(() => {
     tg.onEvent("mainButtonClicked", onSendData);
     return () => {
